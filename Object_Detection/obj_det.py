@@ -12,7 +12,7 @@ import imageio
 def detect(frame, net, transform):
     height, width = frame.shape[:2]
     frame_t = transform(frame)[0]
-    x = torch.from_numpy(frame_t).permute(2,0,1)
+    x = torch.from_numpy(frame_t).permute(2,0,1)# since ssd takes in the order GRB instead of RBG 
     x = Variable(x.unsqueeze(0))
     y = net(x)
     detections = y.data # [batch, num_of_classes, num_of_occurences,(score,x0,y0,x1,y1)]
@@ -35,9 +35,9 @@ transform = BaseTransform(net.size, (104/256.0,117/256.0,123/256.0))
 # If you want to train on a recorder video uncomment the 'Object Detection on a video' and comment out 'Object Recognition with webcam'
 ''' 
 # Object Detection on a video
-reader = imageio.get_reader('epic-horses.mp4')
+reader = imageio.get_reader('path/file.mp4')
 fps = reader.get_meta_data()['fps']
-writer = imageio.get_writer('detected_horses.mp4',fps=fps)
+writer = imageio.get_writer('path/detected_file.mp4',fps=fps)
 for i, frame in enumerate(reader):
     frame = detect(frame, net.eval(),transform)
     writer.append_data(frame)
