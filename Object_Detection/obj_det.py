@@ -32,7 +32,8 @@ net.load_state_dict(torch.load('ssd300_mAP_77.43_v2.pth', map_location = lambda 
 
 # Creating the transformation
 transform = BaseTransform(net.size, (104/256.0,117/256.0,123/256.0))
-'''
+# If you want to train on a recorder video uncomment the 'Object Detection on a video' and comment out 'Object Recognition with webcam'
+''' 
 # Object Detection on a video
 reader = imageio.get_reader('epic-horses.mp4')
 fps = reader.get_meta_data()['fps']
