@@ -23,7 +23,7 @@ def detect(gray,frame):
     return frame
 
 #Face Recognition with webcam
-video_capture = cv2.VideoCapture(0)
+video_capture = cv2.VideoCapture(0) # 1 for external video source
 while True:
     _,frame = video_capture.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
